@@ -1,102 +1,84 @@
 #Clases para determinar animales:
 import time
+bandera = 0
 class cultivos:
-    def __init__(self,siembra,regar,cosechar,cantidad):
+    def __init__(self,siembra,regar,cantidad, dinero):
         self.siembra = siembra #Cantidad de semillas que se utilizaran
         self.regar = regar #Regar los cultivos
-        self.cosechar = cosechar #Para obtener los cultivos
         self.cantidad = cantidad #Semillas que se tienen en el inventario
+        self.dinero = dinero #Cantidad de dinero obtenido por plantar
 
 class trigo(cultivos):
-    def __init__(self, siembra, regar, cosechar, cantidad, tiempo):
-        super().__init__(siembra, regar, cosechar, cantidad)
+    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
+        cultivos.__init__(self, siembra, regar, cantidad, dinero)
         self.tiempo = tiempo #Tiempo para cosechar los cultivos
 
-    def plantar(self): #Funcion para plantar y las semillas que quedan
-        cantidad = self.cantidad
-        siembra = self.siembra
-        restante = cantidad - siembra
-        print(f'Haz utilizado {self.siembra} semillas y te quedan {restante}')
+    def plantarTrigo(self): #Funcion para plantar y las semillas que quedan
+        print(f'Usted tiene: {self.cantidad}')
+        self.siembra = int(input("Ingrese la cantidad de trigo a plantar: "))
+        res = self.cantidad/5
+        if self.siembra > res:
+            print("Semillas insuficientes!")
+        else:
+            gastado = self.siembra*5
+            restante = self.cantidad - gastado
+            print(f'Haz utilizado {gastado} semillas y te quedan {restante}')
+            self.dinero = 15
+            print(f'Has obtenido: {self.dinero} creditos!')
+            print(f'Tus creditos actuales son: {self.dinero}')
 
-    def crecimiento(self): #Contadora hacia atras para saber cuando estaran listos los cultivos
+    def crecimientoTrigo(self): #Contadora hacia atras para saber cuando estaran listos los cultivos
         import time #import time para hacer el conteo hacia atras utilizando sleep que una pausa de 1 seg
-        tiempo = self.tiempo
-        regar = self.regar
-
+        self.tiempo = 60
         print("Tus cultivos estaran listos en:")
-
-        while tiempo > 0:
-            minutos = tiempo // 60
-            segundos = tiempo % 60
+        while self.tiempo > 0:
+            minutos = self.tiempo // 60
+            segundos = self.tiempo % 60
             print(f"Tiempo restante: {minutos:02}:{segundos:02}", end='\r')
             time.sleep(1) 
-            tiempo -= 1
-        
-        print('Tus cultivos estan listos para ser recogidos')
-            
-    def cosechar(self): #Para obtener la cosecha
-        cosechar = self.cosechar
-        print(f'Has cosechado {cosechar} unidades de trigo')
-        
-def datos_para_trigo():
-    print('Recuerda que si estas iniciando comienzas con 50 semillas')
-    siembra = int(input('Ingresa la cantidad de semillas que utilizaras:'))
-    cosecha = siembra
-    trigo1 = trigo(siembra,60,cosecha,50,120)
-    trigo1.plantar()
-    trigo1.crecimiento()
-    trigo1.cosechar()
+            self.tiempo -= 1
+        self.dinero = self.dinero+(self.siembra*5)
+        print('Tus cultivos se cosecharon exitosamente!')
+        print(f'Has obtenido: {self.dinero} creditos!')
+        print(f'Tus creditos actuales son: {self.dinero}')
     
+    def regarTrigo(self):
+        self.tiempo = 30
+        while self.tiempo > 0:
+            time.sleep(1)
+            self.tiempo-=1
+            print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
+        self.dinero = self.dinero+5
+        print(f'Felicitaciones has obtenido: {self.dinero}')
+        print(f'Tus creditos actuales son: {self.dinero}')
 
-def datos_para_tomate():
-    print('Recuerda que si estas iniciando comienzas con 50')
-    siembra = int(input('Ingresa la cantidad de semillas que utilizaras: '))
-    cosecha = siembra
-    tomate1 = trigo(siembra,60,cosecha,50,180)
-    tomate1.plantar()
-    tomate1.crecimiento()
-    tomate1.cosechar()
+trigo1 = trigo(0, 0, 25, 0, 0)
+while bandera == 0:
+    print("1. Trigo")
+    print("2. Tomate")
+    print("3. Cebolla")
+    print("4. Zanahoria")
+    print("5. Maiz")
+    print("6. Informacion")
+    print("7. Salir")
+    opcion = input("¿Que desea hacer?")
+    match opcion: 
+        case '1':
+            print("1. Plantar")
+            print("2. Cosechar")
+            print("3. Regar")
+            opcion = input("¿Que desea hacer?")
+            match opcion:
+                case '1':
+                    trigo1.plantarTrigo()
+                case '2':
+                    trigo1.crecimientoTrigo()
+                case '3':
+                    trigo1.regarTrigo()
 
-def datos_para_cebolla():
-    print ('Recuerda que si estas iniciando comienzas con 50')
-    siembra = int(input('Ingresa la cantidad de semillas que utilizaras: '))
-    cosecha = siembra
-    cebolla1 = trigo(siembra,60,cosecha,50,240)
-    cebolla1.plantar()
-    cebolla1.crecimiento()
-    cebolla1.cosechar()
-
-def datos_para_zanahoria():
-    print ('Recuerda que si estas iniciando comienzas con 50')
-    siembra = int(input('Ingresa la cantidad de semillas que utilizaras: '))
-    cosecha = siembra
-    zanahoria = trigo(siembra,60,cosecha,50,60)
-    zanahoria.plantar()
-    zanahoria.crecimiento()
-    zanahoria.cosechar()
-
-def datos_para_maiz():
-    print ('Recuerda que si estas iniciando comienzas con 50')
-    siembra = int(input('Ingresa la cantidad de semillas que utilizaras: '))
-    cosecha = siembra
-    maiz= trigo(siembra,60,cosecha,50,160 )
-    
-
-print('Menu para plantas')
-print('1. Plantar trigo')
-print('2. Plantar tomate')
-print('3. Plantar cebollas')
-print('4. Plantar Zanahoria')
-opcion = int(input('Ingrese la opcion que desea: '))
-match opcion:
-    case 1:
-        datos_para_trigo()
-    case 2:
-        datos_para_tomate()
-    case 3:
-        datos_para_cebolla()
-    case 4:
-        datos_para_zanahoria()
-    
-    
-
+        case '7':
+            print("Saliendo del juego!")
+            time.sleep(2)
+            bandera = 1
+        case _:
+            print("No ingreso una opcion valida!")
