@@ -52,7 +52,52 @@ class trigo(cultivos):
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
 
+class tomate(cultivos):
+    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
+        cultivos.__init__(siembra, regar, cantidad, dinero)
+        self.tiempo = tiempo
+    
+    def plantarTomate(self):
+        print(f'Usted tiene: {self.cantidad} semillas')
+        self.siembra = int(input("Ingrese la cantidad de tomate a plantar: "))
+        res = self.cantidad/2
+        if self.siembra > res:
+            print("Semillas insuficientes!")
+        else:
+            gastado = self.siembra*2
+            restante = self.cantidad-gastado
+            print(f'Has utilizado: {gastado} semillas y te quedan {restante}')
+            self.dinero = self.dinero+10
+            print(f'Has obtenido: {self.dinero} creditos!')
+            print(f'Tus creditos actuales son: {self.dinero}')
+    
+    def crecimientoTomate(self):
+        import time
+        self.tiempo = 60
+        print("Tus cultivos estaran listos en:")
+        while self.tiempo > 0:
+            minutos = self.tiempo // 60
+            segundos = self.tiempo % 60
+            print(f"Tiempo restante: {minutos:02}:{segundos:02}", end='\r')
+            time.sleep(1) 
+            self.tiempo -= 1
+        self.dinero = self.dinero+(self.siembra*2)
+        print('Tus cultivos se cosecharon exitosamente!')
+        print(f'Has obtenido: {self.dinero} creditos!')
+        print(f'Tus creditos actuales son: {self.dinero}')
+
+    def regarTomate(self):
+        self.tiempo = 20
+        while self.tiempo > 0:
+            time.sleep(1)
+            self.tiempo-=1
+            print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
+        self.dinero = self.dinero+10
+        print(f'Felicitaciones has obtenido: {self.dinero}')
+        print(f'Tus creditos actuales son: {self.dinero}')
+
 trigo1 = trigo(0, 0, 25, 0, 0)
+tomate1 = tomate(0, 0, 25, 0, 0)
 while bandera == 0:
     print("1. Trigo")
     print("2. Tomate")
@@ -75,7 +120,18 @@ while bandera == 0:
                     trigo1.crecimientoTrigo()
                 case '3':
                     trigo1.regarTrigo()
-
+        case '2':
+            print("1. Plantar")
+            print("2. Cosechar")
+            print("3. Regar")
+            opcion = input("¿Que desea hacer?")
+            match opcion:
+                case '1':
+                    tomate1.plantarTomate()
+                case '2':
+                    tomate1.crecimientoTomate()
+                case '3':
+                    tomate1.regarTomate()
         case '7':
             print("Saliendo del juego!")
             time.sleep(2)
