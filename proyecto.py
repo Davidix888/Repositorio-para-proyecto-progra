@@ -3,15 +3,15 @@ import time
 import random
 bandera = 0
 class cultivos:
-    def __init__(self,siembra,regar,cantidad, dinero):
+    def _init_(self,siembra,regar,cantidad, dinero):
         self.siembra = siembra #Cantidad de semillas que se utilizaran
         self.regar = regar #Regar los cultivos
         self.cantidad = cantidad #Semillas que se tienen en el inventario
         self.dinero = dinero #Cantidad de dinero obtenido por plantar
 
 class trigo(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        cultivos.__init__(self, siembra, regar, cantidad, dinero)
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        cultivos._init_(self, siembra, regar, cantidad, dinero)
         self.tiempo = tiempo #Tiempo para cosechar los cultivos
 
     def plantarTrigo(self): #Funcion para plantar y las semillas que quedan
@@ -86,8 +86,8 @@ class trigo(cultivos):
             print("Creditos insuficientes")
 
 class tomate(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        cultivos.__init__(siembra, regar, cantidad, dinero)
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        cultivos._init_(self, siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
     
     def plantarTomate(self): #Funcion para plantar y las semillas que quedan
@@ -162,8 +162,8 @@ class tomate(cultivos):
             print("Creditos insuficientes")
 
 class cebolla(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        cultivos().__init__(siembra, regar, cantidad, dinero)
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        cultivos._init_(self, siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
 
     def plantarCebolla(self): #Funcion para plantar y las semillas que quedan
@@ -238,8 +238,8 @@ class cebolla(cultivos):
             print("Creditos insuficientes")
 
 class zanahoria(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        super().__init__(siembra, regar, cantidad, dinero) 
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        super()._init_(siembra, regar, cantidad, dinero) 
         self.tiempo = tiempo
     
     def plantarZanahoria(self): #Funcion para plantar y las semillas que quedan
@@ -314,8 +314,8 @@ class zanahoria(cultivos):
             print("Creditos insuficientes")
     
 class maiz(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        super().__init__(siembra, regar, cantidad, dinero)
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        super()._init_(siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
     
     def plantarMaiz(self): #Funcion para plantar y las semillas que quedan
@@ -390,8 +390,8 @@ class maiz(cultivos):
             print("Creditos insuficientes")
 
 class puerro(cultivos):
-    def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        super().__init__(siembra, regar, cantidad, dinero)
+    def _init_(self, siembra, regar, cantidad, dinero, tiempo):
+        super()._init_(siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
     
     def plantarPuerro(self): #Funcion para plantar y las semillas que quedan
@@ -466,7 +466,7 @@ class puerro(cultivos):
             print("Creditos insuficientes")
 
 class Animal:
-    def __init__(self, nombre, salud_max, hambre_max, felicidad_max):
+    def _init_(self, nombre, salud_max, hambre_max, felicidad_max):
         self.nombre = nombre
         self.salud = salud_max
         self.hambre = hambre_max
@@ -501,28 +501,28 @@ class Animal:
         pass
 
 class Vaca(Animal):
-    def __init__(self):
-        super().__init__("Vaca", salud_max=100, hambre_max=50, felicidad_max=100)
+    def _init_(self):
+        super()._init_("Vaca", salud_max=100, hambre_max=50, felicidad_max=100)
 
     def producir(self):
         return random.randint(5, 10)
 
 class Oveja(Animal):
-    def __init__(self):
-        super().__init__("Oveja", salud_max=80, hambre_max=40, felicidad_max=90)
+    def _init_(self):
+        super()._init_("Oveja", salud_max=80, hambre_max=40, felicidad_max=90)
 
     def producir(self):
         return random.randint(1, 5)
 
 class Gallina(Animal):
-    def __init__(self):
-        super().__init__("Gallina", salud_max=60, hambre_max=30, felicidad_max=80)
+    def _init_(self):
+        super()._init_("Gallina", salud_max=60, hambre_max=30, felicidad_max=80)
 
     def producir(self):
         return random.randint(2, 4)
 
 class Granja:
-    def __init__(self):
+    def _init_(self):
         self.jugador = Jugador()
 
     def simular_dia(self):
@@ -545,7 +545,7 @@ class Granja:
             exit()
 
 class Jugador:
-    def __init__(self):
+    def _init_(self):
         self.animales = [Vaca(), Oveja(), Gallina()]
 
     def mostrar_menu(self, animal):
@@ -592,6 +592,7 @@ cebolla1 = cebolla(0, 0, 25, 0, 0)
 zanahoria1 = zanahoria(0, 0, 25, 0, 0)
 maiz1 = maiz(0, 0, 25, 0, 0)
 puerro1 = puerro(0, 0, 25, 0, 0)
+granja1 = Granja()
 while bandera == 0:
     print("1. Cultivar")
     print("2. Cuidar animales")
@@ -599,7 +600,7 @@ while bandera == 0:
     opcion = input("¿Que desea hacer?")
     match opcion: 
         case '1':
-            while bandera == 0:
+            while True:
                 print("¿Que desea cultivar?")
                 print("1. Trigo")
                 print("2. Tomate")
@@ -612,27 +613,27 @@ while bandera == 0:
                 opcion = input("Opcion: ")
                 match opcion:
                     case '1':
-                        while bandera == 0:
-                            print("1. Plantar")
-                            print("2. Cosechar")
-                            print("3. Regar")
-                            print("4. Regresar al menu de cultivos")
-                            opcion = input("¿Que desea hacer?")
-                            match opcion:
-                                case '1':
-                                    trigo1.plantarTrigo()
-                                case '2':
-                                    trigo1.crecimientoTrigo()
-                                case '3':
-                                    trigo1.regarTrigo()
-                                case '4':
-                                    print("Regresando al menu de cultivos...")
-                                    time.sleep(2)
-                                    bandera = 1
-                                case _:
-                                    print("No ingreso una opcion valida!")
+                            while True:
+                                print("1. Plantar")
+                                print("2. Cosechar")
+                                print("3. Regar")
+                                print("4. Regresar al menu de cultivos")
+                                opcion = input("¿Que desea hacer?")
+                                match opcion:
+                                    case '1':
+                                        trigo1.plantarTrigo()
+                                    case '2':
+                                        trigo1.crecimientoTrigo()
+                                    case '3':
+                                        trigo1.regarTrigo()
+                                    case '4':
+                                        print("Regresando al menu de cultivos...")
+                                        time.sleep(2)
+                                        break
+                                    case _:
+                                        print("No ingreso una opcion valida!")
                     case '2':
-                        while bandera == 0:
+                        while True:
                             print("1. Plantar")
                             print("2. Cosechar")
                             print("3. Regar")
@@ -648,11 +649,11 @@ while bandera == 0:
                                 case '4':
                                     print("Regresando al menu de cultivos...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida")
                     case '3':
-                        while bandera == 0:
+                        while True:
                             print("1. Plantar")
                             print("2. Cosechar")
                             print("3. Regar")
@@ -668,11 +669,11 @@ while bandera == 0:
                                 case '4':
                                     print("Regresando al menu de cultivos...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida")
                     case '4':
-                        while bandera == 0:
+                        while True:
                             print("1. Plantar")
                             print("2. Cosechar")
                             print("3. Regar")
@@ -688,11 +689,11 @@ while bandera == 0:
                                 case '4':
                                     print("Regresando al menu de cultivos...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida")
                     case '5':
-                        while bandera == 0:
+                        while True:
                             print("1. Plantar")
                             print("2. Cosechar")
                             print("3. Regar")
@@ -708,11 +709,11 @@ while bandera == 0:
                                 case '4':
                                     print("Regresando al menu de cultivos...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida")
                     case '6':
-                        while bandera == 0:
+                        while True:
                             print("1. Plantar")
                             print("2. Cosechar")
                             print("3. Regar")
@@ -728,11 +729,11 @@ while bandera == 0:
                                 case '4':
                                     print("Regresando al menu de cultivos...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida")
                     case '7':
-                        while bandera == 0:
+                        while True:
                             print("BIENVENIDO A LA TIENDA DE CULTIVOS")
                             print("1. Trigo")
                             print("2. Tomate")
@@ -744,7 +745,7 @@ while bandera == 0:
                             opcion = input("Que verdura desea comprar semillas: ")
                             match opcion:
                                 case '1':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Trigo")
                                         print("2. 50 semillas de Trigo")
                                         print("3. 75 semillas de Trigo")
@@ -763,11 +764,11 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de trigo...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '2':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Tomate")
                                         print("2. 50 semillas de Tomate")
                                         print("3. 75 semillas de Tomate")
@@ -786,11 +787,11 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de tomate...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '3':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Cebolla")
                                         print("2. 50 semillas de Cebolla")
                                         print("3. 75 semillas de Cebolla")
@@ -809,11 +810,11 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de cebolla...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '4':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Zanahoria")
                                         print("2. 50 semillas de Zanahoria")
                                         print("3. 75 semillas de Zanahoria")
@@ -832,11 +833,11 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de zanahoria...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '5':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Maiz")
                                         print("2. 50 semillas de Maiz")
                                         print("3. 75 semillas de Maiz")
@@ -855,11 +856,11 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de maiz...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '6':
-                                    while bandera == 0:
+                                    while True:
                                         print("1. 25 semillas de Puerro")
                                         print("2. 50 semillas de Puerro")
                                         print("3. 75 semillas de Puerro")
@@ -878,19 +879,30 @@ while bandera == 0:
                                             case '5':
                                                 print("Saliendo de la tienda de puerro...")
                                                 time.sleep(2)
-                                                bandera = 1
+                                                break
                                             case _:
                                                 print("No ingreso una opcion valida!")
                                 case '7':
                                     print("Saliendo de la tienda...")
                                     time.sleep(2)
-                                    bandera = 1
+                                    break
                                 case _:
                                     print("No ingreso una opcion valida!")
                     case '8':
                         print("Saliendo de los cultivos...")
                         time.sleep(2)
-                        bandera = 1
+                        break
+                    case _:
+                        print("No ingreso una opcion valida!")
+        case '2':
+            while True:
+                opcion = input("¿Quieres pasar al dia siguiente? (s/n)").lower()
+                if opcion == 'n':
+                    print("Gracias por jugar. ¡Hasta luego!")
+                    break
+                
+                granja1.simular_dia()
+                
         case '3':
             print("Saliendo del juego!")
             time.sleep(2)
