@@ -8,6 +8,7 @@ class cultivos:
         self.cantidad = cantidad #Semillas que se tienen en el inventario
         self.dinero = dinero #Cantidad de dinero obtenido por plantar
 
+
 class trigo(cultivos):
     def __init__(self, siembra, regar, cantidad, dinero, tiempo):
         cultivos.__init__(self, siembra, regar, cantidad, dinero)
@@ -48,13 +49,21 @@ class trigo(cultivos):
             time.sleep(1)
             self.tiempo-=1
             print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
-        self.dinero = self.dinero+5
+        self.dinero = self.dinero+15
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
-
+    
+    def dar25_semillas(self):
+        if self.dinero >= 30:
+            self.cantidad = self.cantidad + 25
+            self.dinero = self.dinero - 30
+            print(f'Ahora la cantidad de tus semillas es {self.cantidad} y tus creditos son {self.dinero}')
+        else:
+            print('Creditos insuficientes')
+    
 class tomate(cultivos):
     def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        cultivos.__init__(siembra, regar, cantidad, dinero)
+        cultivos.__init__(self,siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
     
     def plantarTomate(self): #Funcion para plantar y las semillas que quedan
@@ -67,7 +76,7 @@ class tomate(cultivos):
             gastado = self.siembra*5
             restante = self.cantidad - gastado
             print(f'Haz utilizado {gastado} semillas y te quedan {restante}')
-            self.dinero = self.dinero+10
+            self.dinero = self.dinero+20
             print(f'Has obtenido: {self.dinero} creditos!')
             print(f'Tus creditos actuales son: {self.dinero}')
 
@@ -92,13 +101,13 @@ class tomate(cultivos):
             time.sleep(1)
             self.tiempo-=1
             print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
-        self.dinero = self.dinero+5
+        self.dinero = self.dinero+15
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
 
 class cebolla(cultivos):
     def __init__(self, siembra, regar, cantidad, dinero, tiempo):
-        cultivos().__init__(siembra, regar, cantidad, dinero)
+        cultivos.__init__(self,siembra, regar, cantidad, dinero)
         self.tiempo = tiempo
 
     def plantarCebolla(self): #Funcion para plantar y las semillas que quedan
@@ -111,7 +120,7 @@ class cebolla(cultivos):
             gastado = self.siembra*5
             restante = self.cantidad - gastado
             print(f'Haz utilizado {gastado} semillas y te quedan {restante}')
-            self.dinero = self.dinero+8
+            self.dinero = self.dinero+18
             print(f'Has obtenido: {self.dinero} creditos!')
             print(f'Tus creditos actuales son: {self.dinero}')
 
@@ -136,7 +145,7 @@ class cebolla(cultivos):
             time.sleep(1)
             self.tiempo-=1
             print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
-        self.dinero = self.dinero+5
+        self.dinero = self.dinero+15
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')   
 
@@ -155,7 +164,7 @@ class zanahoria(cultivos):
             gastado = self.siembra*5
             restante = self.cantidad - gastado
             print(f'Haz utilizado {gastado} semillas y te quedan {restante}')
-            self.dinero = self.dinero+3
+            self.dinero = self.dinero+22
             print(f'Has obtenido: {self.dinero} creditos!')
             print(f'Tus creditos actuales son: {self.dinero}')
 
@@ -180,7 +189,7 @@ class zanahoria(cultivos):
             time.sleep(1)
             self.tiempo-=1
             print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
-        self.dinero = self.dinero+5
+        self.dinero = self.dinero+15
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
     
@@ -199,7 +208,7 @@ class maiz(cultivos):
             gastado = self.siembra*5
             restante = self.cantidad - gastado
             print(f'Haz utilizado {gastado} semillas y te quedan {restante}')
-            self.dinero = self.dinero+6
+            self.dinero = self.dinero+26
             print(f'Has obtenido: {self.dinero} creditos!')
             print(f'Tus creditos actuales son: {self.dinero}')
 
@@ -224,7 +233,7 @@ class maiz(cultivos):
             time.sleep(1)
             self.tiempo-=1
             print(f'Quedan {self.tiempo} segundos para terminar de regar tus cultivos!', end='\r')
-        self.dinero = self.dinero+5
+        self.dinero = self.dinero+15
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
 
@@ -272,12 +281,30 @@ class puerro(cultivos):
         print(f'Felicitaciones has obtenido: {self.dinero}')
         print(f'Tus creditos actuales son: {self.dinero}')
 
+
+# class tienda(cultivos):
+#     def __init__(self, siembra, regar, cantidad, dinero):
+#         cultivos.__init__(self, siembra, regar, cantidad, dinero)
+        
+#     def dar25_semillas(self):
+#         if self.dinero >= 30:
+#             self.cantidad = self.cantidad + 25
+#             self.dinero = self.dinero - 50
+#             print(f'Ahora la cantidad de tus semillas es {self.cantidad} y tus creditos son {self.dinero}')
+#         else:
+#             print('Creditos insuficientes')
+            
+
+dinero = 0
+       
 trigo1 = trigo(0, 0, 25, 0, 0)
 tomate1 = tomate(0, 0, 25, 0, 0)
 cebolla1 = cebolla(0, 0, 25, 0, 0)
 zanahoria1 = zanahoria(0, 0, 25, 0, 0)
 maiz1 = maiz(0, 0, 25, 0, 0)
 puerro1 = puerro(0, 0, 25, 0, 0)
+# tienda1 = tienda(0,0,25,0)
+
 while bandera == 0:
     print("1. Trigo")
     print("2. Tomate")
@@ -362,9 +389,21 @@ while bandera == 0:
                     puerro1.crecimientoPuerro()
                 case '3':
                     puerro1.regarPuerro()
+
+        case '8':
+            print('1. Comprar 25 semillas')
+            print('2. Comprar 50 semillas')
+            print('3. Comprar 75 semillas')
+            print('4. Comprar 100 semillas')
+            opcion = input('Que desea hacer?')
+            match opcion:
+                case '1':
+                    trigo1.dar25_semillas()
         case '9':
             print("Saliendo del juego!")
             time.sleep(2)
             bandera = 1
         case _:
             print("No ingreso una opcion valida!")
+
+
